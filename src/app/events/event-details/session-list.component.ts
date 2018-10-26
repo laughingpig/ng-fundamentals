@@ -1,12 +1,11 @@
 import { Component, Input, OnChanges } from "@angular/core";
 import { ISession } from "../shared";
-import { NgOnChangesFeature } from "@angular/core/src/render3";
-import { AuthService } from "src/app/user/auth.service";
+import { AuthService } from "../../user/auth.service";
 import { VoterService } from "./voter.service";
 
 @Component({
     selector: 'session-list',
-    templateUrl: 'session-list.component.html',
+    templateUrl: './session-list.component.html',
     styles: [``]
 })
 export class SessionListComponent implements OnChanges{
@@ -24,27 +23,25 @@ export class SessionListComponent implements OnChanges{
         }
     }
 
-    toggleVote(session: ISession){
-        if(this.userHasVoted(session)){
+    toggleVote(session: ISession) {
+        if (this.userHasVoted(session)) {
             this.voterService.deleteVoter(session, this.auth.currentUser.userName);
-        }
-        else{
+        } else {
             this.voterService.addVoter(session, this.auth.currentUser.userName);
         }
-        if(this.sortBy === 'votes'){
+        if (this.sortBy === 'votes') {
             this.visibleSessions.sort(sortByVotesDesc);
         }
     }
 
-    userHasVoted(session: ISession){
+    userHasVoted(session: ISession) {
         return this.voterService.userHasVoted(session, this.auth.currentUser.userName);
     }
 
-    filterSessions(filter){
-        if (filter === 'all'){
+    filterSessions(filter) {
+        if (filter === 'all') {
             this.visibleSessions = this.sessions.slice(0)
-        } 
-        else {
+        } else {
             this.visibleSessions = this.sessions.filter(session => {return session.level.toLocaleLowerCase() === filter})
         }
     }

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import {
   EventsListComponent,
@@ -14,8 +15,9 @@ import {
   SessionListComponent,
   UpvoteComponent,
   VoterService,
-  DurationPipe
-} from './events/index'
+  DurationPipe,
+  LocationValidator
+} from './events/index';
 import { EventsAppComponent  } from './events-app.component';
 import { NavbarComponent } from './nav/nav-bar.component';
 import { TOASTR_TOKEN, Toastr, JQUERY_TOKEN, CollapsibleWellComponent, SimpleModalComponent, ModalTriggerDirective } from './common/index';
@@ -42,7 +44,8 @@ let jquery = window['$']
     SimpleModalComponent,
     DurationPipe,
     UpvoteComponent,
-    ModalTriggerDirective
+    ModalTriggerDirective,
+    LocationValidator
   ],
   providers: [
     EventService,
@@ -61,7 +64,8 @@ let jquery = window['$']
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
   ],
   bootstrap: [EventsAppComponent]
 })
